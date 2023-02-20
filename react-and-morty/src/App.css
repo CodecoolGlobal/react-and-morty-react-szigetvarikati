@@ -1,0 +1,52 @@
+/* colors:
+brown: #44281d
+green: #97ce4c
+skin: #e4a788
+yellow: #f0e14a
+pink: #e89ac7
+blue: #00B2CA
+neongreen: #17FC64 */
+
+@font-face {
+  font-family: "Horror";
+  src: local("get_schwifty"),
+    url("./get_schwifty.ttf") format("truetype");
+}
+
+#root {
+  background-color: #00525c;
+  padding-top: 50px;
+}
+
+body {
+  font-family: "Horror";
+}
+
+header {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button {
+  height: 60px;
+  width: auto;
+  background-color: #00B2CA;
+  border-color: black;
+  border-width: 2px;
+  font-family: "Horror";
+  font-size:xx-large;
+  box-shadow: -1px 2px 7px 7px  #17FC64;
+}
+
+.logo {
+  width: 40%;
+}
+
+.pictures {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  align-items: center;
+  
+}
