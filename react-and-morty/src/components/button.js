@@ -5,7 +5,7 @@ function Button(props) {
   const [isShown, setIsShown] = useState(false);
   return (
     <div>
-      <button className="button"
+      <button className="button" onClick={props.onClick}
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}>
         {props.text}</button>
