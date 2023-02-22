@@ -4,8 +4,7 @@ import { useCharacters, useLocations } from "./api/useData";
 import LandingPage from "./components/landingPage";
 import Header from "./components/header";
 import CharacterPage from "./components/characterPage";
-import Card from "./components/card";
-import Button from "./components/button";
+import LocationPage from "./components/locationPage";
 
 function App() {
   const characters = useCharacters(1);
@@ -43,10 +42,14 @@ function App() {
       )}
       {currentPage === "CharacterPage" && (
         <div>
-          <Button text="Previous" />
-          <Button text="Next" />
           <CharacterPage />
         </div>
+      )}
+      {currentPage === "LocationPage" && (
+        <div>
+          
+          <LocationPage />
+          </div>
       )}
     </div>);
 }
