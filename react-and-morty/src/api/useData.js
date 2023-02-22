@@ -14,7 +14,7 @@ export const useCharacters = (pageNum = 1) => {
   useEffect(() => {
     setUrl(mainUrls.characters + pageNum);
   }, [pageNum]);
-  return characters === undefined ? "Loading..." : characters;
+  return characters === undefined ? null : characters;
 };
 
 /**

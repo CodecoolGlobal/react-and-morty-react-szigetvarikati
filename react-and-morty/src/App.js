@@ -5,6 +5,7 @@ import LandingPage from "./components/landingPage";
 import Header from "./components/header";
 import CharacterPage from "./components/characterPage";
 import Card from "./components/card";
+import Button from "./components/button";
 
 function App() {
   const characters = useCharacters(1);
@@ -42,9 +43,9 @@ function App() {
       )}
       {currentPage === "CharacterPage" && (
         <div>
-          <h2>{characters.results[1].name}</h2>
-          <p>{characters.results[1].species}</p>
-          <img src={characters.results[1].image} alt='szia'></img>
+          <Button text="Previous" />
+          <Button text="Next" />
+          <CharacterPage />
         </div>
       )}
     </div>);
