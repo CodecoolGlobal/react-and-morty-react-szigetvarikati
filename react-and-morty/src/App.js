@@ -3,6 +3,7 @@ import "./App.css";
 import LandingPage from "./components/landingPage";
 import Header from "./components/header";
 import CharacterPage from "./components/characterPage";
+import LocationPage from "./components/locationPage";
 
 function App() {
 
@@ -36,6 +37,12 @@ function App() {
         <div>
           <CharacterPage />
         </div>
+      )}
+      {currentPage === "LocationPage" && (
+        <div>
+          
+          <LocationPage />
+          </div>
       )}
     </div>);
 }
