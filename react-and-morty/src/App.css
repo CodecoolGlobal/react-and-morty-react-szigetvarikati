@@ -50,3 +50,26 @@ header {
   align-items: center;
   
 }
+
+.cardContainer{
+  display: flex;
+  flex-wrap: wrap;
+}
+.card{
+  display: grid;
+  place-items: center;
+  padding: auto;
+  background-color: #97ce4c;
+  border-radius: 40px;
+  background-color: #04272c;
+  margin: 30px;
+  border: 2px #014750 solid;
+}
+
+.card:hover{
+transform: scale(1.1);
+}
+
+.charimg{
+  width: 80%;
+}
