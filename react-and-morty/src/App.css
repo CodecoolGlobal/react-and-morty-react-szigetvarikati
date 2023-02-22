@@ -39,7 +39,7 @@ header {
 }
 
 .logo {
-  width: 40%;
+  width: 30%;
 }
 
 .pictures {
@@ -49,6 +49,10 @@ header {
   margin: auto;
   align-items: center;
   
+}
+
+.landingPage {
+  padding-top: 50px;
 }
 
 .cardContainer{
