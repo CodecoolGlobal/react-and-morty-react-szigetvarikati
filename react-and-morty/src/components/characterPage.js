@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Button from "./button";
+import OneCharacter from "./OneCharacter";
 
 function CharacterPage() {
   const [characters, setCharacters] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCharacter, setSelectedCharacter] = useState(null)
 
   useEffect(() => {
     const url = 'https://rickandmortyapi.com/api/character/?page='
@@ -13,7 +15,7 @@ function CharacterPage() {
   }, [currentPage])
 
   const showCharacter = Array.isArray(characters.results) && characters.results.map((character) => {
-    return( <div className="card">
+    return( <div className="card" onClick={() => setSelectedCharacter(character)}>
     <h2>{character.name}</h2>
     <p>{character.species}</p>
     <img className="charimg" src={character.image} alt='szia'></img>
@@ -24,7 +26,7 @@ function CharacterPage() {
   });
 
   function displayNextPage(){
-    if(currentPage)
+    if(currentPage < 42)
 setCurrentPage(currentPage + 1)
   }
   function displayPrevPage(){
@@ -36,6 +38,9 @@ setCurrentPage(currentPage + 1)
   console.log(showCharacter)
   return (
     <div>
+      {selectedCharacter && (
+        <OneCharacter character={selectedCharacter} onClose={() => setSelectedCharacter(null)} />
+        )}
       <div className="pagination">
         <Button text="Previous" onClick={displayPrevPage} />
         <Button text="Next" onClick={displayNextPage} />
