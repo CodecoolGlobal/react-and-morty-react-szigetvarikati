@@ -8,9 +8,9 @@ function OneCharacter({ character, onClose }) {
           &times;
         </span>
         <h2>Name: {character.name}</h2>
-        <p>Species: {character.species}</p>
-        <p>Status: {character.status}</p>
-        <p>Gender: {character.gender}</p>
+        <h4>Species: {character.species}</h4>
+        <h4>Status: {character.status}</h4>
+        <h4>Gender: {character.gender}</h4>
         <img className="charimg" src={character.image} alt={character.name} />
         <h6>{character.id}</h6>
       </div>

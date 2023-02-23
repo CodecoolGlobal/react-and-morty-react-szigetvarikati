@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Button from "./button";
 import OneCharacter from "./OneCharacter";
 
 function CharacterPage() {
@@ -14,8 +13,8 @@ function CharacterPage() {
     .then((data) => setCharacters(data));
   }, [currentPage])
 
-  const showCharacter = Array.isArray(characters.results) && characters.results.map((character) => {
-    return( <div className="card" onClick={() => setSelectedCharacter(character)}>
+  const showCharacter = Array.isArray(characters.results) && characters.results.map((character,index) => {
+    return( <div className="card" key={index} onClick={() => setSelectedCharacter(character)}>
     <h2>{character.name}</h2>
     <p>{character.species}</p>
     <img className="charimg" src={character.image} alt='szia'></img>
@@ -34,16 +33,14 @@ setCurrentPage(currentPage + 1)
     setCurrentPage(currentPage - 1)
     }
       }
-
-  console.log(showCharacter)
   return (
     <div>
       {selectedCharacter && (
         <OneCharacter character={selectedCharacter} onClose={() => setSelectedCharacter(null)} />
         )}
       <div className="pagination">
-        <Button text="Previous" onClick={displayPrevPage} />
-        <Button text="Next" onClick={displayNextPage} />
+        <button className='PageChangeButton' onClick={displayPrevPage}>←</button>
+        <button className='PageChangeButton' onClick={displayNextPage}>→</button>
       </div>
       <h1>Characters</h1>
       <div className="cardContainer">
