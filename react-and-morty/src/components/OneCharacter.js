@@ -7,9 +7,10 @@ function OneCharacter({ character, onClose }) {
         <span className="close" onClick={onClose}>
           &times;
         </span>
-        <h2>{character.name}</h2>
-        <p>{character.species}</p>
-        <p>{character.gender}</p>
+        <h2>Name: {character.name}</h2>
+        <p>Species: {character.species}</p>
+        <p>Status: {character.status}</p>
+        <p>Gender: {character.gender}</p>
         <img className="charimg" src={character.image} alt={character.name} />
         <h6>{character.id}</h6>
       </div>

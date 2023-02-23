@@ -85,6 +85,7 @@ header {
   margin: 30px;
   border: 2px #014750 solid;
   z-index: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
 
 .card:hover{
