@@ -22,8 +22,10 @@ neongreen: #17FC64 */
   color: #17FC64;
   padding: 20px;
   border-radius: 40px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 10px rgba(23, 252, 100, 0.9);
+  width: 30%;
 }
+
 .close{
   font-size: 25px;
 }
@@ -111,8 +113,8 @@ header {
   margin: 30px;
   border: 2px #014750 solid;
   z-index: 1;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
-  color: #17FC64;
+  box-shadow: 0 0 10px rgba(23, 252, 100, 0.9);
+  color: rgb(23, 252, 100);
 }
 
 .card:hover{

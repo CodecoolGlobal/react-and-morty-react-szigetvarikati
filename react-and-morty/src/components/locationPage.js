@@ -23,24 +23,31 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
   const locationPictures = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10, pic11, pic12, pic13];
 
   function getRandomPicture() {
-    const index = Math.floor(Math.random() * 13 + 1);
+    const index = Math.floor(Math.random() * 13);
     return locationPictures[index]
   }
 
   const url = "https://rickandmortyapi.com/api/location/?page="
+
   useEffect(() => {
     fetch(`${url}${currentPage}`)
       .then((response) => response.json())
-      .then((data) => setLocations(data));
-  }, [currentPage])
+      .then((data) => {
+        const newDataWithImgs = data.results.map((location) => ({
+          ...location,
+          img: locationPictures[Math.floor(Math.random() * locationPictures.length)],
+        }));
+        setLocations(newDataWithImgs);
+      });
+  }, [currentPage]);
 
 
-  const showLocationPage = Array.isArray(locations.results) && locations.results.map((location) => {
+  const showLocationPage = Array.isArray(locations) && locations.map((location) => {
     return (
       <div className="card" onClick={() => setSelectedLocation(location)}>
         <h2>{location.name}</h2>
+        <img className="locPic" src={location.img} alt="the location"></img>
         <p>{location.type}</p>
-        <img className="locPic" src={getRandomPicture()} alt="the location"></img>
       </div>
     )
   });
