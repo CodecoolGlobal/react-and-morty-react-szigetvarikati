@@ -44,15 +44,18 @@ header {
   display: flex;
   justify-content: space-evenly;
 }
+
 .pagination{
   display: flex;
   justify-content: center;
 }
+
 .PageChangeButton {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 20px;
-  height: 60px;
+  height: 40px;
   width: auto;
   background-color: #00B2CA;
   border-color: black;
@@ -95,8 +98,9 @@ header {
   display: flex;
   flex-wrap: wrap;
 }
+
 .card{
-  max-width: 300px;
+  width: 300px;
   position: relative;
   display: grid;
   place-items: center;
@@ -123,4 +127,10 @@ background-color: #074049;
 
 .locPic {
   width: 180px;
+}
+
+h1 {
+  text-align: center;
+  color: #17FC64;
+  font-size: 40px;
 }
