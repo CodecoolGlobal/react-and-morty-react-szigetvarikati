@@ -23,8 +23,8 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
   const locationPictures = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10, pic11, pic12, pic13];
 
   function getRandomPicture() {
-    const index = Math.floor(Math.random() * 13);
-    return locationPictures[index]
+    const index = Math.floor(Math.random() * locationPictures.length);
+    return index
   }
 
   const url = "https://rickandmortyapi.com/api/location/?page="
@@ -35,7 +35,7 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
       .then((data) => {
         const newDataWithImgs = data.results.map((location) => ({
           ...location,
-          img: locationPictures[Math.floor(Math.random() * locationPictures.length)],
+          img: locationPictures[getRandomPicture()],
         }));
         setLocations(newDataWithImgs);
       });
