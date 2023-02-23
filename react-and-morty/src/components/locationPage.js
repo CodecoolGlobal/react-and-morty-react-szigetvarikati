@@ -21,9 +21,9 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedLocation, setSelectedLocation] = useState(null)
   const locationPictures = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10, pic11, pic12, pic13];
-  
+
   function getRandomPicture() {
-    const index = Math.floor(Math.random()*12 + 1);
+    const index = Math.floor(Math.random() * 13 + 1);
     return locationPictures[index]
   }
 
@@ -45,24 +45,6 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
     )
   });
 
-  // function displayOneCard(event) {
-  //   const OneCard = Array.isArray(locations.results) && locations.results.map((location) => {
-  //     return ({
-  //       name: location.name,
-  //       type: location.type,
-  //       id: location.id
-  //     })
-  //   })
-  //   console.log(OneCard)
-
-  //   for (let i = 0; i < OneCard.length; i++) {
-  //     if (event.target.innerText === (OneCard[i].name || OneCard[i].type)) {
-  //       console.log(OneCard[i].id);
-  //     }
-  //   }
-  // }
-
-
   function displayNextPage() {
     if (currentPage < 42) {
       setCurrentPage(currentPage + 1)
@@ -74,15 +56,15 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
       setCurrentPage(currentPage - 1)
     }
   }
-  
+
   return (
     <div>
       {selectedLocation && (
         <OneLocation character={selectedLocation} onClose={() => setSelectedLocation(null)} />
       )}
       <div className="pagination">
-        <Button text="Previous" onClick={displayPrevPage}/>
-        <Button text="Next" onClick={displayNextPage}/>
+        <button className='PageChangeButton' onClick={displayPrevPage}>←</button>
+        <button className='PageChangeButton' onClick={displayNextPage}>→</button>
       </div>
       <h1>Locations</h1>
       <div className="cardContainer">
