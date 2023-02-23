@@ -26,6 +26,10 @@ neongreen: #17FC64 */
   width: 30%;
 }
 
+.oneCharContent {
+  text-align: center;
+} 
+
 .close{
   font-size: 25px;
 }
