@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import Button from "./button";
 import pic1 from "./locations_pic/pic1.png";
@@ -46,7 +47,7 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
     return (
       <div className="card" onClick={() => setSelectedLocation(location)}>
         <h2>{location.name}</h2>
-        <img className="locPic" src={location.img} alt="the location"></img>
+        <img className="locPic" src={location.img} alt={location.name}></img>
         <p>{location.type}</p>
       </div>
     )

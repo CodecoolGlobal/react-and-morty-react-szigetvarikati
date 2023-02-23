@@ -18,7 +18,7 @@ function CharacterPage() {
     return (<div className="card" key={index} onClick={() => setSelectedCharacter(character)}>
       <h2>{character.name}</h2>
       <p>{character.species}</p>
-      <img className="charimg" src={character.image} alt='szia'></img>
+      <img className="charimg" src={character.image} alt={character.name}></img>
       <h6>{character.id}</h6>
 
     </div>)
