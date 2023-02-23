@@ -53,7 +53,7 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
   });
 
   function displayNextPage() {
-    if (currentPage < 42) {
+    if (currentPage < 7) {
       setCurrentPage(currentPage + 1)
     }
   }
@@ -70,10 +70,11 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
         <OneLocation character={selectedLocation} onClose={() => setSelectedLocation(null)} />
       )}
       <div className="pagination">
-        <button className='PageChangeButton' onClick={displayPrevPage}>←</button>
-        <button className='PageChangeButton' onClick={displayNextPage}>→</button>
+        <Button text='←' className='PageChangeButton' onClick={displayPrevPage} />
+        <Button text='→' className='PageChangeButton' onClick={displayNextPage} />
       </div>
       <h1>Locations</h1>
+      <p>{currentPage} Page of 7</p>
       <div className="cardContainer">
         {showLocationPage}
       </div>
