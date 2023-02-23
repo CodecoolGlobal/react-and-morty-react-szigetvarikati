@@ -5,7 +5,7 @@ function Button(props) {
   const [isShown, setIsShown] = useState(false);
   return (
     <div>
-      <button className="button" onClick={props.onClick}>
+      <button className={props.className} onClick={props.onClick}>
         {props.text}</button>
       {isShown && (
         <div className="hoverButtonText">
