@@ -95,3 +95,7 @@ transform: scale(1.1);
 .charimg{
   width: 80%;
 }
+
+.locPic {
+  width: 180px;
+}
