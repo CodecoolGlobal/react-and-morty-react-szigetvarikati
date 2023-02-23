@@ -18,7 +18,8 @@ neongreen: #17FC64 */
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  background-color: #00525c;
+  background-color: #04272c;
+  color: #17FC64;
   padding: 20px;
   border-radius: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
@@ -27,7 +28,6 @@ neongreen: #17FC64 */
   font-size: 25px;
 }
 
-
 #root {
   background-color: #00525c;
   padding-top: 50px;
@@ -35,14 +35,35 @@ neongreen: #17FC64 */
 
 body {
   font-family: "Horror";
+  background-color: #00525c;
+
 }
 
 header {
+  margin-right: 15px;
   display: flex;
   justify-content: space-evenly;
 }
+.pagination{
+  display: flex;
+  justify-content: center;
+}
+.PageChangeButton {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  height: 60px;
+  width: auto;
+  background-color: #00B2CA;
+  border-color: black;
+  border-width: 2px;
+  font-family: "Horror";
+  font-size:xx-large;
+  box-shadow: -1px 2px 7px 7px  #17FC64;
+}
 
 .button {
+  display: flex;
   height: 60px;
   width: auto;
   background-color: #00B2CA;
@@ -75,6 +96,7 @@ header {
   flex-wrap: wrap;
 }
 .card{
+  max-width: 300px;
   position: relative;
   display: grid;
   place-items: center;
@@ -86,10 +108,13 @@ header {
   border: 2px #014750 solid;
   z-index: 1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  color: #17FC64;
 }
 
 .card:hover{
 transform: scale(1.1);
+background-color: #074049;
+
 }
 
 .charimg{
