@@ -22,7 +22,6 @@ function CharacterPage() {
       <h6>{character.id}</h6>
 
     </div>)
-
   });
 
   function displayNextPage() {
