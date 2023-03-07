@@ -21,12 +21,7 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
   const [locations, setLocations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedLocation, setSelectedLocation] = useState(null)
-  const locationPictures = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10, pic11, pic12, pic13];
-
-  function getRandomPicture() {
-    const index = Math.floor(Math.random() * locationPictures.length);
-    return index
-  }
+  const locationPictures = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10, pic11, pic12, pic13, pic4, pic5, pic6, pic2, pic3, pic10, pic8];
 
   const url = "https://rickandmortyapi.com/api/location/?page="
 
@@ -34,13 +29,13 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
     fetch(`${url}${currentPage}`)
       .then((response) => response.json())
       .then((data) => {
-        const newDataWithImgs = data.results.map((location) => ({
+        const newDataWithImgs = data.results.map((location, index) => ({
           ...location,
-          img: locationPictures[getRandomPicture()],
+          img: locationPictures[index],
         }));
         setLocations(newDataWithImgs);
       });
-  }, [currentPage]);
+  }, [currentPage, locationPictures]);
 
 
   const showLocationPage = Array.isArray(locations) && locations.map((location) => {
