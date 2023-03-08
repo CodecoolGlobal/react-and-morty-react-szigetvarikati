@@ -7,7 +7,15 @@ require('dotenv').config();
 const characters = require('./character.schema')
 const locations = require('./location.schema')
 
+//itt vmi baja van....
+//const pic1 = require("./locations_pic/pic1");
+
+const { urlencoded } = require('express');
+
 const app = express();
+
+app.use(express.json());
+app.use(urlencoded({extended: true}));
 
 app.get('/', async (req, res) => {
   res.end("OK");
@@ -43,6 +51,10 @@ app.get('/api/locations/name/:name', async (req, res) => {
   const regex = new RegExp(req.params.name, 'i');
   const locationByName = await locations.find({name: regex});
   res.json(locationByName);
+})
+
+app.get('/api/picture', async (req, res) => {
+  res.end("fbfdbd")
 })
 
 const port = process.env?.PORT ?? 7000;
