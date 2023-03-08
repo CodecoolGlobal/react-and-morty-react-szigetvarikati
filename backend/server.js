@@ -45,11 +45,10 @@ app.get('/api/locations/id/:id', async (req, res) => {
 /* app.get('/api/locations/name/:name', async (req, res) => {
   const regex = new RegExp(req.params.name, 'i');
   const locationByName = await locations.find({name: regex});
-  res.json(locationByName);
+  res.json(locationByName); */
 
 const main = async () => {
     await mongoose.connect(mongoUrl);
    app.listen(7000)
   };
 main()
-
