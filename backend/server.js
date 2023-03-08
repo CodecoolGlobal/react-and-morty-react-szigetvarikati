@@ -8,7 +8,7 @@ const locations = require('./db/planet.model')
 const mongoUrl = process.env.MongoUrl
 const app = express();
 app.use(express.json())
-app.use(urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}))
 
 const searchin = (subfolder, key, value, what, number, sortBy) => subfolder.find({[key]: value}, what).limit(number).sort(sortBy).lean()
 
@@ -46,6 +46,7 @@ app.get('/api/locations/id/:id', async (req, res) => {
   const regex = new RegExp(req.params.name, 'i');
   const locationByName = await locations.find({name: regex});
   res.json(locationByName);
+*/
 
 const main = async () => {
     await mongoose.connect(mongoUrl);
