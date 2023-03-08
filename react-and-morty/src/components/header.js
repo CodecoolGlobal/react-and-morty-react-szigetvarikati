@@ -1,12 +1,14 @@
 import Button from "./button";
 
-function Header({handlePageChangeCharacter, handlePageChangeLocation, handlePageChangeLandingPage}) {
+function Header({handlePageChangeCharacter, handlePageChangeLocation, handlePageChangeLandingPage, handlePageChangeNewCharacter, handlePageChangeNewLocation}) {
 
   return (
   <header>
-    <Button text='Characters' className='button' hover="Let's see the characters of Rick and Morty series!" onClick={handlePageChangeCharacter} />
-    <Button text='MainPage' className='button' onClick={handlePageChangeLandingPage}/>
-    <Button text='Locations'  className='button' hover="Let's see the locations of Rick and Morty series!" onClick={handlePageChangeLocation} />
+    <Button text='Characters' className='button' onClick={handlePageChangeCharacter} />
+    <Button text='Create New Character' className='button' onClick={handlePageChangeNewCharacter} />
+    <Button text='MainPage' className='button' onClick={handlePageChangeLandingPage} />
+    <Button text='Locations'  className='button' onClick={handlePageChangeLocation} />
+    <Button text='Discover new Location' className='button' onClick={handlePageChangeNewLocation} />
   </header>
   )
 }
