@@ -23,13 +23,13 @@ function LocationPage({ displayNextPage, displayPrevPage }) {
   const [selectedLocation, setSelectedLocation] = useState(null)
   const locationPictures = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10, pic11, pic12, pic13, pic4, pic5, pic6, pic2, pic3, pic10, pic8];
 
-  const url = "https://rickandmortyapi.com/api/location/?page="
+  const url = "/api/locations"
 
   useEffect(() => {
-    fetch(`${url}${currentPage}`)
+    fetch(`${url}`)
       .then((response) => response.json())
       .then((data) => {
-        const newDataWithImgs = data.results.map((location, index) => ({
+        const newDataWithImgs = data.map((location, index) => ({
           ...location,
           img: locationPictures[index],
         }));

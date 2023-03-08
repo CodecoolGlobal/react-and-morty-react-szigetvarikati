@@ -8,13 +8,13 @@ function CharacterPage() {
   const [selectedCharacter, setSelectedCharacter] = useState(null)
 
   useEffect(() => {
-    const url = 'https://rickandmortyapi.com/api/character/?page='
-    fetch(`${url}${currentPage}`)
+    const url = '/api/characters'
+    fetch(`${url}`)
       .then((response) => response.json())
       .then((data) => setCharacters(data));
   }, [currentPage])
 
-  const showCharacter = Array.isArray(characters.results) && characters.results.map((character, index) => {
+  const showCharacter = Array.isArray(characters) && characters.map((character, index) => {
     return (<div className="card" key={index} onClick={() => setSelectedCharacter(character)}>
       <h2>{character.name}</h2>
       <p>{character.species}</p>
