@@ -15,7 +15,7 @@ const fetchingCharacter = async () => {
         return fetch(`https://rickandmortyapi.com/api/character/?page=${i+1}`)
         .then(response => response.json())
         .then(data =>  data.results.map(x=> {
-            const oneData = {id: x.id, name: x.name, status: x.status, species: x.species, location: x.location, image: x.image}
+            const oneData = {id: x.id, name: x.name, status: x.status, species: x.species, gender: x.gender, location: x.location, image: x.image}
             allData.push(oneData)
 }))}
     )

@@ -4,7 +4,10 @@ const CharactersSchema = new mongoose.Schema({
     name: String,
     status: String,
     species: String,
-    location: Object,
+    gender: String,
+    location: {
+        name: String
+    },
     image: String
 })
 

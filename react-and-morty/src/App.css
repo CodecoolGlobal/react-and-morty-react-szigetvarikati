@@ -73,8 +73,9 @@ header {
   border-color: black;
   border-width: 2px;
   font-family: "Horror";
-  font-size: xx-large;
-  box-shadow: -1px 2px 7px 7px #17fc64;
+  font-size:xx-large;
+  box-shadow: -1px 2px 7px 7px  #17FC64;
+  cursor: pointer;
 }
 
 .logo {

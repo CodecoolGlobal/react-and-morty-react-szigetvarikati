@@ -20,6 +20,7 @@ function OneCharacter({ character, onClose, handleKill, condition , stayAtCurren
         <h4>Species: {character.species}</h4>
         <h4>Status: {character.status}</h4>
         <h4>Gender: {character.gender}</h4>
+        <h4>Location: {character.location.name}</h4>
         <img className="charimg" src={character.image} alt={character.name} />
         <h6>{character.id}</h6>
         {character.status === "Alive" && (

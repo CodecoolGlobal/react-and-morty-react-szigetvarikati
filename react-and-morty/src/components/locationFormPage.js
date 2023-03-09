@@ -8,7 +8,7 @@ const LocationForm = () => {
       type: type,
       dimension: dimension
     }
-    console.log(location);
+    
     handleCreateLocation(location)
     setName("");
     setType("");
