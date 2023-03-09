@@ -1,18 +1,32 @@
 import { useEffect, useState } from "react";
 import OneCharacter from "./OneCharacter";
-import Button from "./button";
+import Footer from "./pagination/pagination";
+import List from "./displayList/list";
+
+const paginating = (characters, page) => {
+  return characters.map((x,i)=> {if(page === 0 && i < 10){return x} else if
+  (i + page < page + 10){return characters[i+page]}
+    } )
+}
 
 function CharacterPage() {
-  const [characters, setCharacters] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
-
-  const fetchCharacters = () => {
+  const [selectedCharacter, setSelectedCharacter] = useState(null)
+  const [paginationData, setPaginationData] = useState([])
+  const [page, setPage] = useState()
+  console.log(characters)
+  console.log(paginationData)
+  
+   const fetchCharacters = () => {
     const url = "/api/characters";
     fetch(`${url}`)
       .then((response) => response.json())
-      .then((data) => setCharacters(data));
+      .then((data) => setCharacters(data))
+      .then(() => setPage(0));
   };
+  
+   useEffect(() => {
+    fetchCharacters();
+  }, []);
 
   const handleKill = async (character) => {
     const newStatus = character.status === "Alive" ? "Dead" : "Alive";
@@ -33,38 +47,10 @@ function CharacterPage() {
   };
 
   useEffect(() => {
-    fetchCharacters();
-  }, [currentPage]);
-
-  const showCharacter =
-    Array.isArray(characters) &&
-    characters.map((character, index) => {
-      return (
-        <div
-          className="card"
-          key={index}
-          onClick={() => setSelectedCharacter(character)}
-        >
-          <h2>{character.name}</h2>
-          <p>{character.species}</p>
-          <img
-            className="charimg"
-            src={character.image}
-            alt={character.name}
-          ></img>
-          <h6>{character.id}</h6>
-        </div>
-      );
-    });
-
-  function displayNextPage() {
-    if (currentPage < 42) setCurrentPage(currentPage + 1);
-  }
-  function displayPrevPage() {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  }
+    const actualData = paginating(characters, page).filter(x=> x !== undefined)
+    setPaginationData(actualData)
+  },[page])
+ 
   return (
     <div>
       {selectedCharacter && (
@@ -74,21 +60,9 @@ function CharacterPage() {
           handleKill={handleKill}
         />
       )}
-      <div className="pagination">
-        <Button
-          text="←"
-          className="PageChangeButton"
-          onClick={displayPrevPage}
-        />
-        <Button
-          text="→"
-          className="PageChangeButton"
-          onClick={displayNextPage}
-        />
-      </div>
       <h1>Characters</h1>
-      <p>{currentPage} of 42</p>
-      <div className="cardContainer">{showCharacter}</div>
+      <List paginationData={paginationData} setSelectedCharacter={setSelectedCharacter} character={true} />
+      <Footer data={characters} setPage={setPage} />
     </div>
   );
 }

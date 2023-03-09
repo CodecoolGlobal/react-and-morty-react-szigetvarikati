@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
   res.end("OK");
 });
 
+
 app.get("/api/characters", async (req, res) => {
   const allCharactersData = await searchin(characters);
   res.json(allCharactersData);
