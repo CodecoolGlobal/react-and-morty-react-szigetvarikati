@@ -23,12 +23,12 @@ function CharacterPage() {
   
   useEffect(() => {
     const url = "/api/characters";
-    fetch(`${url}`)
+    fetch(url)
       .then((response) => response.json())
       .then((data) => setCharacters(data))
       .then(() => setPage(stayAtCurrentPage === false ? 0 : page))
       .then(() => setCondition(false));
-  },[condition])
+  },[])
   
   
 
@@ -66,7 +66,7 @@ function CharacterPage() {
         />
       )}
       <h1>Characters</h1>
-      <List paginationData={paginationData} setSelectedCharacter={setSelectedCharacter} character={true} />
+      <List paginationData={paginationData} setSelectedCharacter={setSelectedCharacter} character={false} />
       <Footer data={characters} setPage={setPage} />
     </div>
   );

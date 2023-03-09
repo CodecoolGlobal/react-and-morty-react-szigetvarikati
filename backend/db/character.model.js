@@ -4,6 +4,7 @@ const CharactersSchema = new mongoose.Schema({
     name: String,
     status: String,
     species: String,
+    gender: String,
     location: Object,
     image: String
 })

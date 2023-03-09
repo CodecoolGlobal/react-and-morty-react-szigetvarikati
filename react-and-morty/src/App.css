@@ -76,6 +76,7 @@ header {
   font-family: "Horror";
   font-size:xx-large;
   box-shadow: -1px 2px 7px 7px  #17FC64;
+  cursor: pointer;
 }
 
 .logo {

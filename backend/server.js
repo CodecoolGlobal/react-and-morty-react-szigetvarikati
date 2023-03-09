@@ -28,6 +28,12 @@ app.get("/api/characters", async (req, res) => {
   res.json(allCharactersData);
 });
 
+app.post('/api/characters', async (req, res) => {
+  const data = req.body;
+  const newCharacter = await characters.create(data)
+  res.json(newCharacter)
+})
+
 app.get("/api/characters/id/:id", async (req, res) => {
   const characterById = await searchin(characters, "id", req.params.id);
   res.json(characterById[0]);
