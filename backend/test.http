@@ -1,0 +1,13 @@
+GET http://localhost:7000/api/locations
+
+###
+POST http://localhost:7000/api/locations
+Content-Type: application/json
+
+{
+  "name": "New Planet",
+  "type": "Planet",
+  "dimension": "dimension"
+}
+
+###

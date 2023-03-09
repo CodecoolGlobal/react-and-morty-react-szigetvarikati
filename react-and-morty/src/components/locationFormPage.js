@@ -1,34 +1,38 @@
 import { useEffect, useState } from "react";
 
-const LocationForm = ({ onSave, disabled, location, onCancel }) => {
+const LocationForm = ({ location, onCancel }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    //console.log(formData);
     const entries = [...formData.entries()];
+    //console.log(entries);
 
     const location = entries.reduce((acc, entry) => {
       const [k, v] = entry;
       acc[k] = v;
       return acc;
     }, {});
+    console.log(location);
 
-    return onSave(location);
+
   };
+
 
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [dimension, setDimension] = useState("");
-  
-  const [data, setData] = useState([]);
+
+  const [data, setData] = useState(location);
   const [loading, setLoading] = useState(true)
 
-  const createLocation = (newLocation) => {
+  const handleCreateLocation = (name, type, dimension) => {
     fetch('/api/locations', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name, type, dimension })
+      body: JSON.stringify( name, type, dimension )
     })
       .then((res) => res.json())
       .then((location) => {
@@ -36,18 +40,23 @@ const LocationForm = ({ onSave, disabled, location, onCancel }) => {
       })
   };
 
-  useEffect(() => {
-    fetch('/api/locations')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-    console.log(data);
-  }, [] );
-
+  // useEffect(() => {
+  //   fetch('/api/locations')
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       setData(data);
+  //       setLoading(false);
+  //     });
+  //   }, [] );
+  //   console.log(data);
+  
+  if (!location) {
+    return (
+      <div>Loading...</div>
+    )
+  }
   return (
     <form className="form" onSubmit={onSubmit}>
       <h1 className="">Discover a new Location!!!</h1>
@@ -59,7 +68,7 @@ const LocationForm = ({ onSave, disabled, location, onCancel }) => {
         <label htmlFor="name">Name:  </label>
         <input
           value={name}
-          onChange={(e) => setName(e.currentTarget.value)}
+          onChange={(e) => setName(e.target.value)}
           type="text"
           name="name"
           id="name"
@@ -70,7 +79,7 @@ const LocationForm = ({ onSave, disabled, location, onCancel }) => {
         <label htmlFor="type">Type:  </label>
         <input
           value={type}
-          onChange={(e) => setType(e.currentTarget.value)}
+          onChange={(e) => setType(e.target.value)}
           type="text"
           name="type"
           id="type"
@@ -81,7 +90,7 @@ const LocationForm = ({ onSave, disabled, location, onCancel }) => {
         <label htmlFor="dimension">Dimension:</label>
         <input
           value={dimension}
-          onChange={(e) => setDimension(e.currentTarget.value)}
+          onChange={(e) => setDimension(e.target.value)}
           type="text"
           name="dimension"
           id="dimension"
@@ -89,7 +98,7 @@ const LocationForm = ({ onSave, disabled, location, onCancel }) => {
       </div>
 
       <div className="formbuttons">
-        <button className="button" type="submit" disabled={disabled} onClick={createLocation}>
+        <button className="button" type="submit" onClick={handleCreateLocation(name, type, dimension)}>
           {location ? "Update Location" : "Create Your Location"}
         </button>
 

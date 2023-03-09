@@ -37,6 +37,12 @@ app.get('/api/locations', async (req, res) => {
   res.json(allLocationsData);
 })
 
+app.post('/api/locations', async (req, res) => {
+  const data = req.body;
+  const newLocation = await locations.create(data)
+  res.json(newLocation)
+})
+
 app.get('/api/locations/id/:id', async (req, res) => {
     const locationById = await searchin(locations, 'id', req.params.id);
     res.json(locationById[0]);
