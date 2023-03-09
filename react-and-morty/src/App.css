@@ -9,8 +9,7 @@ neongreen: #17FC64 */
 
 @font-face {
   font-family: "Horror";
-  src: local("get_schwifty"),
-    url("./get_schwifty.ttf") format("truetype");
+  src: local("get_schwifty"), url("./get_schwifty.ttf") format("truetype");
 }
 .oneChar {
   position: fixed;
@@ -19,7 +18,7 @@ neongreen: #17FC64 */
   transform: translate(-50%, -50%);
   z-index: 2;
   background-color: #04272c;
-  color: #17FC64;
+  color: #17fc64;
   padding: 20px;
   border-radius: 40px;
   box-shadow: 0 0 10px rgba(23, 252, 100, 0.9);
@@ -28,10 +27,11 @@ neongreen: #17FC64 */
 
 .oneCharContent {
   text-align: center;
-} 
+}
 
-.close{
+.close {
   font-size: 25px;
+  cursor: pointer;
 }
 
 #root {
@@ -42,7 +42,6 @@ neongreen: #17FC64 */
 body {
   font-family: "Horror";
   background-color: #00525c;
-
 }
 
 header {
@@ -58,19 +57,19 @@ header {
   margin: 20px;
   height: 40px;
   width: auto;
-  background-color: #00B2CA;
+  background-color: #00b2ca;
   border-color: black;
   border-width: 2px;
   font-family: "Horror";
-  font-size:xx-large;
-  box-shadow: -1px 2px 7px 7px  #17FC64;
+  font-size: xx-large;
+  box-shadow: -1px 2px 7px 7px #17fc64;
 }
 
 .button {
   display: flex;
   height: 60px;
   width: auto;
-  background-color: #00B2CA;
+  background-color: #00b2ca;
   border-color: black;
   border-width: 2px;
   font-family: "Horror";
@@ -89,7 +88,6 @@ header {
   justify-content: center;
   margin: auto;
   align-items: center;
-  
 }
 
 .landingPage {
@@ -98,61 +96,23 @@ header {
 
 h1 {
   text-align: center;
-  color: #17FC64;
+  color: #17fc64;
   font-size: 40px;
 }
 
 p {
   text-align: center;
-  color: #17FC64;
+  color: #17fc64;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.killbutton {
+  text-align: center;
+  border-radius: 40px;
+  font-weight: 600;
+  width: 80px;
+  height: 30px;
+  background-color: #00b2ca;
+  box-shadow: -1px 2px 7px 7px #17fc64;
+}
 
 .form {
   margin-top: 1%;
@@ -165,19 +125,19 @@ p {
   display: flex;
   justify-content: center;
   padding-top: 20px;
-  color: #17FC64;
+  color: #17fc64;
 }
 
 input {
   height: 30px;
   width: 300px;
-  background-color:rgb(132, 244, 170);
+  background-color: rgb(132, 244, 170);
 }
 
 .formbuttons {
   display: flex;
   flex-direction: row;
-  gap: 100px ;
+  gap: 100px;
   justify-content: center;
   margin-top: 20px;
 }
