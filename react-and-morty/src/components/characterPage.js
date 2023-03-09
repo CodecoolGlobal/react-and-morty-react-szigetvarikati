@@ -1,52 +1,73 @@
 import { useEffect, useState } from "react";
 import OneCharacter from "./OneCharacter";
-import Button from "./button";
+import Footer from "./pagination/pagination";
+import List from "./displayList/list";
+
+const paginating = (characters, page) => {
+  return characters.map((x,i)=> {if(page === 0 && i < 10){return x} else if
+  (i + page < page + 10){return characters[i+page]}
+    } )
+}
 
 function CharacterPage() {
-  const [characters, setCharacters] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [characters, setCharacters] = useState([])
   const [selectedCharacter, setSelectedCharacter] = useState(null)
-
+  const [paginationData, setPaginationData] = useState([])
+  const [page, setPage] = useState()
+  const [condition, setCondition] = useState(false)
+  const [stayAtCurrentPage, setStayAtCurrentPage] = useState(false)
+  console.log(characters)
+  console.log(paginationData)
+  console.log(selectedCharacter)
+  console.log(stayAtCurrentPage)
+  
   useEffect(() => {
-    const url = '/api/characters'
+    const url = "/api/characters";
     fetch(`${url}`)
       .then((response) => response.json())
-      .then((data) => setCharacters(data));
-  }, [currentPage])
+      .then((data) => setCharacters(data))
+      .then(() => setPage(stayAtCurrentPage === false ? 0 : page))
+      .then(() => setCondition(false));
+  },[condition])
+  
+  
 
-  const showCharacter = Array.isArray(characters) && characters.map((character, index) => {
-    return (<div className="card" key={index} onClick={() => setSelectedCharacter(character)}>
-      <h2>{character.name}</h2>
-      <p>{character.species}</p>
-      <img className="charimg" src={character.image} alt={character.name}></img>
-      <h6>{character.id}</h6>
-
-    </div>)
-  });
-
-  function displayNextPage() {
-    if (currentPage < 42)
-      setCurrentPage(currentPage + 1)
-  }
-  function displayPrevPage() {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1)
+  const handleKill = async (character) => {
+    const newStatus = character.status === "Alive" ? "Dead" : "Alive";
+    try {
+      const response = await fetch(`/api/characters/id/${character.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
     }
-  }
+  };
+
+  useEffect(() => {
+    const actualData = paginating(characters, page).filter(x=> x !== undefined)
+    setPaginationData(actualData)
+  },[page, characters])
+ 
   return (
     <div>
       {selectedCharacter && (
-        <OneCharacter character={selectedCharacter} onClose={() => setSelectedCharacter(null)} />
+        <OneCharacter
+          character={selectedCharacter}
+          onClose={() => setSelectedCharacter(null)}
+          handleKill={handleKill}
+          condition={() => setCondition(true)}
+          stayAtCurrentPage={() => setStayAtCurrentPage(true)}
+        />
       )}
-      <div className="pagination">
-        <Button text='←' className='PageChangeButton' onClick={displayPrevPage} />
-        <Button text='→' className='PageChangeButton' onClick={displayNextPage} />
-      </div>
       <h1>Characters</h1>
-      <p>{currentPage} of 42</p>
-      <div className="cardContainer">
-        {showCharacter}
-      </div>
+      <List paginationData={paginationData} setSelectedCharacter={setSelectedCharacter} character={true} />
+      <Footer data={characters} setPage={setPage} />
     </div>
   );
 }
