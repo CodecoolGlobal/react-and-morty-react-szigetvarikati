@@ -10,23 +10,27 @@ const paginating = (characters, page) => {
 }
 
 function CharacterPage() {
+  const [characters, setCharacters] = useState([])
   const [selectedCharacter, setSelectedCharacter] = useState(null)
   const [paginationData, setPaginationData] = useState([])
   const [page, setPage] = useState()
+  const [condition, setCondition] = useState(false)
+  const [stayAtCurrentPage, setStayAtCurrentPage] = useState(false)
   console.log(characters)
   console.log(paginationData)
+  console.log(selectedCharacter)
+  console.log(stayAtCurrentPage)
   
-   const fetchCharacters = () => {
+  useEffect(() => {
     const url = "/api/characters";
     fetch(`${url}`)
       .then((response) => response.json())
       .then((data) => setCharacters(data))
-      .then(() => setPage(0));
-  };
+      .then(() => setPage(stayAtCurrentPage === false ? 0 : page))
+      .then(() => setCondition(false));
+  },[condition])
   
-   useEffect(() => {
-    fetchCharacters();
-  }, []);
+  
 
   const handleKill = async (character) => {
     const newStatus = character.status === "Alive" ? "Dead" : "Alive";
@@ -40,7 +44,6 @@ function CharacterPage() {
       });
       const data = await response.json();
       console.log(data);
-      fetchCharacters();
     } catch (error) {
       console.error(error);
     }
@@ -49,7 +52,7 @@ function CharacterPage() {
   useEffect(() => {
     const actualData = paginating(characters, page).filter(x=> x !== undefined)
     setPaginationData(actualData)
-  },[page])
+  },[page, characters])
  
   return (
     <div>
@@ -58,6 +61,8 @@ function CharacterPage() {
           character={selectedCharacter}
           onClose={() => setSelectedCharacter(null)}
           handleKill={handleKill}
+          condition={() => setCondition(true)}
+          stayAtCurrentPage={() => setStayAtCurrentPage(true)}
         />
       )}
       <h1>Characters</h1>

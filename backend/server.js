@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 
 
 app.get("/api/characters", async (req, res) => {
-  const allCharactersData = await searchin(characters);
+  const allCharactersData = await searchin(characters, null, null, null, null, 'id');
   res.json(allCharactersData);
 });
 
@@ -39,7 +39,7 @@ app.get("/api/characters/id/:id", async (req, res) => {
 }) */
 
 app.get("/api/locations", async (req, res) => {
-  const allLocationsData = await searchin(locations);
+  const allLocationsData = await searchin(locations, null, null, null, null, 'id');
   res.json(allLocationsData);
 });
 

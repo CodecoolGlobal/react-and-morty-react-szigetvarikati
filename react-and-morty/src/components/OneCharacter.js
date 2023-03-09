@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./button";
 
-function OneCharacter({ character, onClose, handleKill }) {
+function OneCharacter({ character, onClose, handleKill, condition , stayAtCurrentPage}) {
+
   const handleStatusChange = () => {
     handleKill(character);
-    onClose();
+    onClose(onClose);
+    condition(condition)
+    stayAtCurrentPage(stayAtCurrentPage)
   };
 
   return (
