@@ -10,33 +10,56 @@ const paginating = (characters, page) => {
 }
 
 function CharacterPage() {
-  const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState(null)
   const [paginationData, setPaginationData] = useState([])
   const [page, setPage] = useState()
   console.log(characters)
   console.log(paginationData)
-
-  useEffect(() => {
-    const url = '/api/characters'
-    fetch(url)
+  
+   const fetchCharacters = () => {
+    const url = "/api/characters";
+    fetch(`${url}`)
       .then((response) => response.json())
       .then((data) => setCharacters(data))
-      .then(() => setPage(0))
-  }, [])
+      .then(() => setPage(0));
+  };
+  
+   useEffect(() => {
+    fetchCharacters();
+  }, []);
+
+  const handleKill = async (character) => {
+    const newStatus = character.status === "Alive" ? "Dead" : "Alive";
+    try {
+      const response = await fetch(`/api/characters/id/${character.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      const data = await response.json();
+      console.log(data);
+      fetchCharacters();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const actualData = paginating(characters, page).filter(x=> x !== undefined)
     setPaginationData(actualData)
   },[page])
-  
+ 
   return (
     <div>
       {selectedCharacter && (
-        <OneCharacter character={selectedCharacter} onClose={() => setSelectedCharacter(null)} />
+        <OneCharacter
+          character={selectedCharacter}
+          onClose={() => setSelectedCharacter(null)}
+          handleKill={handleKill}
+        />
       )}
-      <div className="pagination">
-      </div>
       <h1>Characters</h1>
       <List paginationData={paginationData} setSelectedCharacter={setSelectedCharacter} character={true} />
       <Footer data={characters} setPage={setPage} />
