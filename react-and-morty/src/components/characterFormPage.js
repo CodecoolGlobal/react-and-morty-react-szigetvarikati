@@ -96,6 +96,17 @@ const CharacterForm = () => {
         </div>
 
         <div className="control">
+          <label htmlFor="location">Location:</label>
+          <input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            type="text"
+            name="species"
+            id="species"
+          />
+        </div>
+
+        <div className="control">
           <label htmlFor="image">Image:</label>
           <input
             value={image}
@@ -119,6 +130,8 @@ const CharacterForm = () => {
           <h4>Species: {data.species}</h4>
           <h4>Status: {data.status}</h4>
           <h4>Gender: {data.gender}</h4>
+          <h4>Location: {data.location.name}</h4>
+          <img className="charimg" src={data.image} alt={data.name} />
         </div>
       </div>
         : null}
