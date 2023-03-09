@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 const LocationForm = ({ onSave, disabled, location, onCancel }) => {
   const onSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +15,39 @@ const LocationForm = ({ onSave, disabled, location, onCancel }) => {
     return onSave(location);
   };
 
+  const [name, setName] = useState("");
+  const [type, setType] = useState("");
+  const [dimension, setDimension] = useState("");
+  
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true)
+
+  const createLocation = (newLocation) => {
+    fetch('/api/locations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, type, dimension })
+    })
+      .then((res) => res.json())
+      .then((location) => {
+        setData([...data, location]);
+      })
+  };
+
+  useEffect(() => {
+    fetch('/api/locations')
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+    console.log(data);
+  }, [] );
+
   return (
     <form className="form" onSubmit={onSubmit}>
       <h1 className="">Discover a new Location!!!</h1>
@@ -23,7 +58,9 @@ const LocationForm = ({ onSave, disabled, location, onCancel }) => {
       <div className="control">
         <label htmlFor="name">Name:  </label>
         <input
-          defaultValue={location ? location.name : null}
+          value={name}
+          onChange={(e) => setName(e.currentTarget.value)}
+          type="text"
           name="name"
           id="name"
         />
@@ -32,7 +69,9 @@ const LocationForm = ({ onSave, disabled, location, onCancel }) => {
       <div className="control">
         <label htmlFor="type">Type:  </label>
         <input
-          defaultValue={location ? location.type : null}
+          value={type}
+          onChange={(e) => setType(e.currentTarget.value)}
+          type="text"
           name="type"
           id="type"
         />
@@ -41,18 +80,20 @@ const LocationForm = ({ onSave, disabled, location, onCancel }) => {
       <div className="control">
         <label htmlFor="dimension">Dimension:</label>
         <input
-          defaultValue={location ? location.dimension : null}
+          value={dimension}
+          onChange={(e) => setDimension(e.currentTarget.value)}
+          type="text"
           name="dimension"
           id="dimension"
         />
       </div>
 
       <div className="formbuttons">
-        <button className="button" type="submit" disabled={disabled}>
-          {location ? "Update Employee" : "Create Your Location"}
+        <button className="button" type="submit" disabled={disabled} onClick={createLocation}>
+          {location ? "Update Location" : "Create Your Location"}
         </button>
 
-        <button className="button" type="button" onClick={onCancel}>
+        <button className="button" type="button" onClick={onCancel} >
           Cancel
         </button>
       </div>
