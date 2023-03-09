@@ -3,7 +3,6 @@ import { useState } from "react";
 const LocationForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
-    //console.log(formData);
     const location = {
       name: name,
       type: type,
@@ -36,23 +35,6 @@ const LocationForm = () => {
       })
   };
 
-  // useEffect(() => {
-  //   fetch('/api/locations')
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       setData(data);
-  //       setLoading(false);
-  //     });
-  //   }, [] );
-  //   console.log(data);
-
-  // if (!location) {
-  //   return (
-  //     <div>Loading...</div>
-  //   )
-  // }
   return (
     <>
       <form className="form" onSubmit={onSubmit}>
@@ -92,7 +74,7 @@ const LocationForm = () => {
 
         <div className="formbuttons">
           <button className="button" type="submit">
-            "Create Your Location"
+            Create Your Location
           </button>
         </div>
       </form>
@@ -102,7 +84,6 @@ const LocationForm = () => {
       <h2>Name: {data.name}</h2>
       <h4>Type: {data.type}</h4>
       <h4>Dimension: {data.dimension}</h4>
-      <h6>ID: {data.id}</h6>
     </div>
   </div>
       :null}
