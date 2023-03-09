@@ -4,6 +4,8 @@ import LandingPage from "./components/landingPage";
 import Header from "./components/header";
 import CharacterPage from "./components/characterPage";
 import LocationPage from "./components/locationPage";
+import CharacterFormPage from "./components/characterFormPage";
+import LocationFormPage from "./components/locationFormPage";
 
 function App() {
 
@@ -21,7 +23,14 @@ function App() {
     setCurrentPage("LandingPage");
   }
 
-  
+  function handlePageChangeNewCharacter() {
+    setCurrentPage("CharacterFormPage");
+  }
+
+  function handlePageChangeNewLocation() {
+    setCurrentPage("LocationFormPage");
+  }
+
   return (
     <div className="App">
       <Header
@@ -29,7 +38,9 @@ function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         handlePageChangeLocation={handlePageChangeLocation}
-        handlePageChangeLandingPage={handlePageChangeLandingPage} />
+        handlePageChangeLandingPage={handlePageChangeLandingPage}
+        handlePageChangeNewCharacter={handlePageChangeNewCharacter}
+        handlePageChangeNewLocation={handlePageChangeNewLocation} />
       {currentPage === "LandingPage" && (
         <LandingPage />
       )}
@@ -40,9 +51,18 @@ function App() {
       )}
       {currentPage === "LocationPage" && (
         <div>
-          
           <LocationPage />
-          </div>
+        </div>
+      )}
+      {currentPage === "CharacterFormPage" && (
+        <div>
+          <CharacterFormPage />
+        </div>
+      )}
+      {currentPage === "LocationFormPage" && (
+        <div>
+          <LocationFormPage />
+        </div>
       )}
     </div>);
 }

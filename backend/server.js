@@ -1,14 +1,15 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-require("dotenv").config();
-const characters = require("./db/character.model");
-const locations = require("./db/planet.model");
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
+const characters = require('./db/character.model')
+const locations = require('./db/planet.model')
+const morgan = require('morgan')
 
-const mongoUrl = process.env.MongoUrl;
+const mongoUrl = process.env.MongoUrl
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
+app.use(morgan("dev"));
 
 const searchin = (subfolder, key, value, what, number, sortBy) =>
   subfolder
@@ -42,6 +43,12 @@ app.get("/api/locations", async (req, res) => {
   const allLocationsData = await searchin(locations, null, null, null, null, 'id');
   res.json(allLocationsData);
 });
+
+app.post('/api/locations', async (req, res) => {
+  const data = req.body;
+  const newLocation = await locations.create(data)
+  res.json(newLocation)
+})
 
 app.get("/api/locations/id/:id", async (req, res) => {
   const locationById = await searchin(locations, "id", req.params.id);
