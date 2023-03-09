@@ -5,7 +5,7 @@ POST http://localhost:7000/api/locations
 Content-Type: application/json
 
 {
-  "name": "New Planet",
+  "name": "New Planet3",
   "type": "Planet",
   "dimension": "dimension"
 }

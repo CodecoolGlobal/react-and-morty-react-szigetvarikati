@@ -1,14 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
 const characters = require('./db/character.model')
 const locations = require('./db/planet.model')
+const morgan = require('morgan')
 
 const mongoUrl = process.env.MongoUrl
 const app = express();
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(morgan("dev"));
 
 const searchin = (subfolder, key, value, what, number, sortBy) => subfolder.find({[key]: value}, what).limit(number).sort(sortBy).lean()
 
