@@ -23,10 +23,10 @@ function OneCharacter({ character, onClose, handleKill, condition , stayAtCurren
         <img className="charimg" src={character.image} alt={character.name} />
         <h6>{character.id}</h6>
         {character.status === "Alive" && (
-          <Button text="Kill" onClick={handleStatusChange} />
+          <Button text="Kill" className='killbutton' onClick={handleStatusChange} />
         )}
         {character.status === "Dead" && (
-          <Button text="Resurrect" onClick={handleStatusChange} />
+          <Button text="Resurrect" className='killbutton' onClick={handleStatusChange} />
         )}
       </div>
     </div>
