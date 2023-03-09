@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/characters', async (req,res) => {
-  const allCharactersData = await searchin(characters);
+  const allCharactersData = await searchin(characters, null, null, null, null, 'id');
   res.json(allCharactersData);
 })
 

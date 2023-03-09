@@ -1,0 +1,38 @@
+.cardContainer{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .card{
+    width: 230px;
+    height: 490px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: auto;
+    background-color: #97ce4c;
+    border-radius: 40px;
+    background-color: #04272c;
+    margin: 30px;
+    border: 2px #014750 solid;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(23, 252, 100, 0.9);
+    color: rgb(23, 252, 100);
+  }
+  
+  .card:hover{
+  transform: scale(1.1);
+  background-color: #074049;
+  }
+  
+  .card>h2 {
+    text-align: center;
+  }
+
+  .charimg{
+    width: 80%;
+  }
+
+  .locPic {
+    width: 180px;
+  }
