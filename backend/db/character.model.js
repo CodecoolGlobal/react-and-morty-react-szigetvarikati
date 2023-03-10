@@ -5,9 +5,8 @@ const CharactersSchema = new mongoose.Schema({
     status: String,
     species: String,
     gender: String,
-    location: {
-        name: String
-    },
+    locationId: String,
+    // location:  { type: Schema.Types.ObjectId, ref: 'Person' }
     image: String
 })
 

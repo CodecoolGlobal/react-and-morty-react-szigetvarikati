@@ -9,16 +9,29 @@ const mongoUrl = process.env.MongoUrl
 
 
 
-const fetchingCharacter = async () => {
+const fetchingCharacter = async (locations) => {
     const allData=[];
-    const promises = [...Array(5)].map((_,i) => {
-        return fetch(`https://rickandmortyapi.com/api/character/?page=${i+1}`)
-        .then(response => response.json())
-        .then(data =>  data.results.map(x=> {
-            const oneData = {id: x.id, name: x.name, status: x.status, species: x.species, gender: x.gender, location: x.location, image: x.image}
+    const promises = [...Array(5)].map(async (_,i) => {
+        const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${i+1}`)
+        const data = await response.json();
+        // console.log(data);
+        for (const x of data.results) {
+            const last = (arr) => arr[arr.length-1];
+            const locationId = last(x.location.url.split("/"));
+            // console.log("finding location", locationId);
+            const dbLocation = await PlanetModel.findOne({ id: locationId });
+            const oneData = {
+                id: x.id,
+                name: x.name,
+                status: x.status,
+                species: x.species,
+                gender: x.gender,
+                locationId: dbLocation === null ? "" : dbLocation._id,
+                image: x.image
+            }
             allData.push(oneData)
-}))}
-    )
+        }
+    });
 
     await Promise.all(promises)
     return allData}
@@ -38,10 +51,10 @@ const fetchingLocation = async () => {
     return allData
 }
 
-const populateCharacter = async () => {
+const populateCharacter = async (locations) => {
     await CharacterModel.deleteMany()
 
-    const data = await fetchingCharacter()
+    const data = await fetchingCharacter(locations)
 
     await CharacterModel.insertMany(data)
 }
@@ -51,15 +64,17 @@ const populatePlanet = async () => {
 
     const data = await fetchingLocation()
 
-    await PlanetModel.insertMany(data)
+    const dbLocations = await PlanetModel.insertMany(data);
+    // console.log(dbLocations);
+    return dbLocations;
 }
 
 const main = async () => {
     await mongoose.connect(mongoUrl)
 
-    await populateCharacter()
+    const locations = await populatePlanet();
+    await populateCharacter(locations);
 
-    await populatePlanet()
 
     await mongoose.disconnect()
 }

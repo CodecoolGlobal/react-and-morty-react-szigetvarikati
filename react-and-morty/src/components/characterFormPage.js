@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CharacterForm = () => {
   const onSubmit = (e) => {
@@ -9,7 +9,7 @@ const CharacterForm = () => {
       species: species,
       type: type,
       gender: gender,
-      location: {name: location},
+      locationId: locationId,
       image: image
     }
 
@@ -19,7 +19,7 @@ const CharacterForm = () => {
     setSpecies("");
     setType("");
     setGender("");
-    setLocation("");
+    setLocationId("");
     setImage("");
   };
 
@@ -28,10 +28,19 @@ const CharacterForm = () => {
   const [species, setSpecies] = useState("");
   const [type, setType] = useState("");
   const [gender, setGender] = useState("");
-  const [location, setLocation] = useState("");
+  const [locationId, setLocationId] = useState("");
   const [image, setImage] = useState("");
-
+  const [locations, setLocationIds] = useState(null);
   const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      const response = await fetch("/api/locations")
+      const locations = await response.json();
+      setLocationIds(locations);
+    };
+    fetchLocations();
+  }, [])
 
   const handleCreateCharacter = (character) => {
     fetch('/api/characters', {
@@ -46,6 +55,10 @@ const CharacterForm = () => {
         setData(character);
       })
   };
+
+  if (locations === null) {
+    return <div>Loading</div>;
+  }
 
   return (
     <>
@@ -97,13 +110,17 @@ const CharacterForm = () => {
 
         <div className="control">
           <label htmlFor="location">Location:</label>
-          <input
+          <select onChange={(e) => setLocationId(e.target.value)}>
+            {locations.map(location => <option value={location._id}>{location.name}</option>)}
+          </select>
+
+          {/* <input
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             type="text"
             name="species"
             id="species"
-          />
+          /> */}
         </div>
 
         <div className="control">
@@ -130,7 +147,7 @@ const CharacterForm = () => {
           <h4>Species: {data.species}</h4>
           <h4>Status: {data.status}</h4>
           <h4>Gender: {data.gender}</h4>
-          <h4>Location: {data.location.name}</h4>
+          <h4>Location: {data.locationId}</h4>
           <img className="charimg" src={data.image} alt={data.name} />
         </div>
       </div>
